@@ -30,3 +30,4 @@ func (c Contact) SearchFriends(userId uint) []User {
 	utils.DB.Where("id IN ?", objIds).Find(&users)
 	return users
 }
+eee
