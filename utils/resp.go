@@ -27,7 +27,7 @@ func Resp(w http.ResponseWriter, code int, data interface{}, msg string) {
 	}
 	w.Write(ret)
 }
-func RespOKFail(w http.ResponseWriter, msg string) {
+func RespFail(w http.ResponseWriter, msg string) {
 	Resp(w, -1, nil, msg)
 }
 func RespOK(w http.ResponseWriter, data interface{}, msg string) {

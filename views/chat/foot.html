@@ -162,8 +162,15 @@
                     this.profile.nickname = userInfo.Name;
                 },
                 playaudio: function (url) {
-                    document.getElementById('audio4play').src = url;
-                    document.getElementById('audio4play').play();
+                    // document.getElementById('audio4play').src = url;
+                    // document.getElementById('audio4play').play();
+                        var audio = document.getElementById('audio4play');
+                        audio.src = url;
+
+                        audio.addEventListener('loadeddata', function() {
+                            audio.play();
+                        });
+
                 },
                 startrecorder: function () {
                     let audioTarget = document.getElementById('audio');
@@ -187,11 +194,12 @@
 
                     this.duration = new Date().getTime();
                     //video 摄像头   ，audio 音频
-                    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+                    navigator.mediaDevices.getUserMedia({ audio: true, video: false })//音频，摄像头
                         .then(function (stream) {
                             this.showprocess = true
                             this.recorder = new MediaRecorder(stream);
                             audioTarget.srcObject = stream;
+
                             //是否可用
                             this.recorder.ondataavailable = (event) => {
                                 console.log("ondataavailable");
@@ -347,7 +355,7 @@
                         if (msg.Type == 1) {
                             this.showmsg(userInfo(), msg);
                         }
-                        //console.log("sendaudiomsg",this.msglist);
+                        console.log("sendaudiomsg",this.msglist);
                         this.webSocket.send(JSON.stringify(msg))
                     }
                 },
